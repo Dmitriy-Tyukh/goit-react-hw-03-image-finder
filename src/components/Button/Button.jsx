@@ -1,11 +1,16 @@
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
+import { ButtonStyled } from './Button.styled';
 
 const ButtonLoadMore = ({ onIncrement }) => {
     return (
-      <Button onClick={onIncrement} variant="contained" size="large">
-        Load More
-      </Button>
+      //   <LoadMoreBtnStyled type="button" onClick={onClick} hidden="hidden">
+      //     Load more
+      //   </LoadMoreBtnStyled>
+
+      <ButtonStyled type="button" onClick={onIncrement} hidden="hidden">
+     Load more 
+      </ButtonStyled>
     );
 };
 
