@@ -38,5 +38,5 @@ export default GalleryItem;
 GalleryItem.propTypes = {
   webformatURL: PropTypes.string.isRequired,
   largeImageURL: PropTypes.string.isRequired,
-  user: PropTypes.string,
+  user: PropTypes.string.isRequired,
 };
