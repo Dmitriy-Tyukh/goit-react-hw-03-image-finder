@@ -49,7 +49,7 @@ class App extends Component {
 
   incrementPage = () => {
     this.setState(prevState => ({
-      page: (prevState.page += 1),
+      page: (prevState.page + 1),
     }));
     scrollPage();
   };
