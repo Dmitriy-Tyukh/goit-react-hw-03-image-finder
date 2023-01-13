@@ -18,38 +18,46 @@ class App extends Component {
 
   async componentDidUpdate(_, prevState) {
     const { page, searchValue } = this.state;
-      
-      if (searchValue.trim() === '') {
-          alert('Введите значение для поиска!')
-          return
-      }
-        try {
-          if (
-            prevState.page !== page ||
-            prevState.searchValue !== searchValue
-          ) {
-            this.setState({
-              status: 'pending',
-            });
 
-            const data = await pixabayApi(page, searchValue);
+    if (searchValue.trim() === '') {
+      alert('Введите значение для поиска!');
+      return;
+    }
+    try {
+      if (prevState.page !== page || prevState.searchValue !== searchValue) {
+        this.setState({
+          status: 'pending',
+        });
 
-            this.setState(prevState => ({
-              dataImg: [...prevState.dataImg, ...data.hits],
-              status: 'sucsses',
-            }));
+        const data = await pixabayApi(page, searchValue);
+
+        const dataHits = data.hits.map(
+          ({ id, webformatURL, largeImageURL, user }) => {
+            return {
+              id: id,
+              webformatURL: webformatURL,
+              largeImageURL: largeImageURL,
+              user: user,
+            };
           }
-        } catch ({ message }) {
-          this.setState({
-            error: message,
-            status: 'idle',
-          });
-        }
+        );
+
+        this.setState(prevState => ({
+          dataImg: [...prevState.dataImg, ...dataHits],
+          status: 'sucsses',
+        }));
+      }
+    } catch ({ message }) {
+      this.setState({
+        error: message,
+        status: 'idle',
+      });
+    }
   }
 
   incrementPage = () => {
     this.setState(prevState => ({
-      page: (prevState.page + 1),
+      page: prevState.page + 1,
     }));
     scrollPage();
   };
@@ -73,8 +81,12 @@ class App extends Component {
         />
         {status === 'pending' && <Loader />}
         {error && <p>Error {error}, please reload the page and try again!</p>}
-        {status === 'sucsses' && (<ImageGallery onOpenModal={this.handleOpenModal} onSubmit={dataImg} />)}
-        {status === 'sucsses' && (<ButtonLoadMore onIncrement={this.incrementPage} />)}
+        {status === 'sucsses' && (
+          <ImageGallery onOpenModal={this.handleOpenModal} onSubmit={dataImg} />
+        )}
+        {status === 'sucsses' && (
+          <ButtonLoadMore onIncrement={this.incrementPage} />
+        )}
       </AppStyeled>
     );
   }

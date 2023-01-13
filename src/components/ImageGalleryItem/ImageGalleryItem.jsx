@@ -4,6 +4,12 @@ import { Item, ItemImage } from './ImageGalleryItem.styled';
 import Modal from 'components/Modal';
 
 class GalleryItem extends PureComponent {
+  static propTypes = {
+    webformatURL: PropTypes.string.isRequired,
+    largeImageURL: PropTypes.string.isRequired,
+    user: PropTypes.string.isRequired,
+};
+
   state = {
     isOpen: false,
   };
@@ -20,7 +26,7 @@ class GalleryItem extends PureComponent {
     return (
       <Fragment>
         <Item onClick={toggleModal}>
-          <ItemImage src={webformatURL} alt={user} />
+          <ItemImage src={webformatURL} alt={user} loading="lasy" />
         </Item>
 
         {isOpen && (
@@ -34,9 +40,3 @@ class GalleryItem extends PureComponent {
 }
 
 export default GalleryItem;
-
-GalleryItem.propTypes = {
-  webformatURL: PropTypes.string.isRequired,
-  largeImageURL: PropTypes.string.isRequired,
-  user: PropTypes.string.isRequired,
-};

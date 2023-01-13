@@ -4,7 +4,7 @@ import GalleryItem from '../ImageGalleryItem/ImageGalleryItem'
 
 const ImageGallery = ({ onSubmit }) => {
   return (
-    <ImageList className="gallery">
+    <ImageList>
       {onSubmit.map(({ id, webformatURL, largeImageURL, user }) => (
         <GalleryItem
           key={id}
