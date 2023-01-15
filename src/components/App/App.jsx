@@ -84,9 +84,9 @@ class App extends Component {
         <ToastContainer theme="colored" />
         {status === 'pending' && <Loader />}
         {error && <p>Error {error}, please reload the page and try again!</p>}
-        {status === 'sucsses' && (
-          <ImageGallery onOpenModal={this.handleOpenModal} onSubmit={dataImg} />
-        )}
+ 
+        <ImageGallery onOpenModal={this.handleOpenModal} onSubmit={dataImg} />
+        
         {status === 'sucsses' && (
           <ButtonLoadMore onIncrement={this.incrementPage} />
         )}
