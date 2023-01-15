@@ -77,19 +77,14 @@ class App extends Component {
 
     return (
       <AppStyeled>
-        <Searchbar
-          onSubmitForm={this.searchByValue}
-          status={status === 'pending'}
-        />
+        <Searchbar onSubmitForm={this.searchByValue} status={status === 'pending'} />
         <ToastContainer theme="colored" />
-        {status === 'pending' && <Loader />}
         {error && <p>Error {error}, please reload the page and try again!</p>}
- 
+
         <ImageGallery onOpenModal={this.handleOpenModal} onSubmit={dataImg} />
-        
-        {status === 'sucsses' && (
-          <ButtonLoadMore onIncrement={this.incrementPage} />
-        )}
+            
+        {status === 'pending' && <Loader />}
+        {status === 'sucsses' && (<ButtonLoadMore onIncrement={this.incrementPage} />)}
       </AppStyeled>
     );
   }
